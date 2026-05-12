@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Laundry Diva</string>
+    <string name="btn_save">Simpan</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="loading">Harap tunggu…</string>
+
+    <string name="title_login">Welcome Back</string>
+    <string name="subtitle_login">Sign in to your laundry account</string>
+    <string name="hint_email">your@email.com</string>
+    <string name="hint_password">••••••••</string>
+    <string name="btn_sign_in">Sign In</string>
+
+    <string name="title_data_pelanggan">Data Pelanggan</string>
+    <string name="hint_cari_pelanggan">Cari nama pelanggan…</string>
+    <string name="desc_tambah_pelanggan">Tombol untuk menambah pelanggan baru</string>
+    <string name="msg_empty_customer">Data pelanggan belum ada atau tidak ditemukan</string>
+
+    <string name="title_buat_order">Buat Order Baru</string>
+    <string name="label_pilih_customer">Pilih Customer</string>
+    <string name="label_pilih_layanan">Pilih Layanan</string>
+    <string name="label_berat">Input Berat (Kg)</string>
+    <string name="label_total_harga">Total Harga</string>
+    <string name="btn_proses_order">PROSES ORDER</string>
+
+    <string name="title_pengeluaran">Tambah Pengeluaran</string>
+    <string name="label_nama_barang">Nama Barang / Keperluan</string>
+    <string name="label_nominal">Nominal (Rp)</string>
+    <string name="label_kategori_biaya">Kategori Biaya</string>
+    <string name="hint_pilih_kategori">Pilih kategori pengeluaran</string>
+    <string name="hint_tgl_pengeluaran">Tanggal (YYYY-MM-DD)</string>
+    <string name="btn_simpan_pengeluaran">SIMPAN PENGELUARAN</string>
+
+    <string name="error_network">Gagal terhubung ke server. Periksa koneksi internet.</string>
+    <string name="error_input_empty">Semua kolom wajib diisi!</string>
+    <string name="title_riwayat_order">Riwayat Order</string>
+    <string name="hint_cari_order">Cari ID Order atau Nama…</string>
+    <string name="msg_order_kosong">Belum ada riwayat order</string>
+</resources>
