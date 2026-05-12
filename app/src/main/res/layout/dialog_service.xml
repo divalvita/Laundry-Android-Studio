@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etServiceName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama layanan" />
+
+    <EditText
+        android:id="@+id/etServicePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Harga per kg"
+        android:inputType="number"
+        android:layout_marginTop="12dp" />
+
+    <EditText
+        android:id="@+id/etServiceDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Estimasi hari"
+        android:inputType="number"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>

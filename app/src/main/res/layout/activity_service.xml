@@ -18,30 +18,19 @@
             android:id="@+id/toolbarService"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Layanan &amp; Kategori"
+            app:title="Layanan Laundry"
             app:titleTextColor="@color/white"
             app:navigationIcon="?attr/homeAsUpIndicator"
             app:navigationIconTint="@color/white" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/navy_primary"
-            app:tabIndicatorColor="@color/accent_orange"
-            app:tabIndicatorHeight="3dp"
-            app:tabSelectedTextColor="@color/accent_orange"
-            app:tabTextColor="@color/white"
-
-            android:contentDescription="Navigasi Layanan dan Kategori"
-
-            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvService"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="8dp"
+        android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

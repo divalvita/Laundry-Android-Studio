@@ -8,19 +8,24 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Laundry App"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".SplashActivity" android:exported="true">
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity android:name=".ui.auth.LoginActivity" />
         <activity android:name=".ui.auth.RegisterActivity" />
+
         <activity android:name=".MainActivity" />
+
         <activity android:name=".ui.customer.CustomerActivity" />
         <activity android:name=".ui.service.ServiceActivity" />
         <activity android:name=".ui.order.CreateOrderActivity" />
@@ -29,4 +34,5 @@
         <activity android:name=".ui.expense.ExpenseActivity" />
 
     </application>
+
 </manifest>

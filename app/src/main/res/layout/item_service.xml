@@ -20,9 +20,7 @@
             android:id="@+id/ivServiceIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-
             android:src="@android:drawable/ic_menu_manage"
-
             android:contentDescription="Ikon Layanan"
             app:tint="@color/blue_secondary" />
 
@@ -52,15 +50,33 @@
                 tools:text="Rp 7.000 / Kg" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btnEditService"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_edit"
-            android:contentDescription="Edit Layanan"
-            app:tint="@color/blue_secondary"
-            tools:ignore="TouchTargetSizeCheck" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnEditService"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_edit"
+                android:contentDescription="Edit Layanan"
+                app:tint="@color/blue_secondary"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/btnDeleteService"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_delete"
+                android:contentDescription="Hapus Layanan"
+                app:tint="#D32F2F"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

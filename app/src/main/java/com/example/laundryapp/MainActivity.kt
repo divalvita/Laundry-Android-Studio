@@ -5,6 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.laundryapp.databinding.ActivityMainBinding
 import com.example.laundryapp.ui.customer.CustomerActivity
+import com.example.laundryapp.ui.expense.ExpenseActivity
+import com.example.laundryapp.ui.order.CreateOrderActivity
+import com.example.laundryapp.ui.order.OrderHistoryActivity
 import com.example.laundryapp.ui.service.ServiceActivity
 
 class MainActivity : AppCompatActivity() {
@@ -13,26 +16,53 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
 
-        // Navigasi ke Halaman Customer
+        // ================= DASHBOARD CARD =================
+
         binding.cardCustomer.setOnClickListener {
-            val intent = Intent(this, CustomerActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, CustomerActivity::class.java))
         }
 
-        // Setup Bottom Navigation
+        binding.cardService.setOnClickListener {
+            startActivity(Intent(this, ServiceActivity::class.java))
+        }
+
+        binding.cardOrder.setOnClickListener {
+            startActivity(Intent(this, CreateOrderActivity::class.java))
+        }
+
+        binding.cardExpense.setOnClickListener {
+            startActivity(Intent(this, ExpenseActivity::class.java))
+        }
+
+        // ================= BOTTOM NAVIGATION =================
+
         binding.bottomNav.setOnItemSelectedListener { item ->
+
             when (item.itemId) {
+
                 R.id.nav_dash -> true
+
                 R.id.nav_service -> {
                     startActivity(Intent(this, ServiceActivity::class.java))
                     true
                 }
-                // Tambahkan case menu lainnya sesuai menu XML kamu
+
+                R.id.nav_order -> {
+                    startActivity(Intent(this, CreateOrderActivity::class.java))
+                    true
+                }
+
+                R.id.nav_report -> {
+                    startActivity(Intent(this, OrderHistoryActivity::class.java))
+                    true
+                }
+
                 else -> false
             }
         }

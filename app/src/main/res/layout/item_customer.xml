@@ -51,5 +51,15 @@
             app:tint="@color/accent_orange"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <ImageButton
+            android:id="@+id/btnDeleteCustomer"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Hapus Data Pelanggan"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="#D32F2F"
+            tools:ignore="TouchTargetSizeCheck" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
