@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.laundryapp.databinding.ActivityMainBinding
+import com.example.laundryapp.ui.customer.CustomerActivity
+import com.example.laundryapp.ui.service.ServiceActivity
 
 class MainActivity : AppCompatActivity() {
 

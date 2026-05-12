@@ -1,4 +1,4 @@
-package com.example.laundryapp
+package com.example.laundryapp.ui.customer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

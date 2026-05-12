@@ -14,15 +14,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ui.auth.LoginActivity" />
+        <activity android:name=".ui.auth.RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CustomerActivity" />
-        <activity android:name=".ServiceActivity" />
-        <activity android:name=".CreateOrderActivity" />
-        <activity android:name=".PaymentActivity" />
-        <activity android:name=".OrderHistoryActivity" />
-        <activity android:name=".ExpenseActivity" />
+        <activity android:name=".ui.customer.CustomerActivity" />
+        <activity android:name=".ui.service.ServiceActivity" />
+        <activity android:name=".ui.order.CreateOrderActivity" />
+        <activity android:name=".ui.payment.PaymentActivity" />
+        <activity android:name=".ui.order.OrderHistoryActivity" />
+        <activity android:name=".ui.expense.ExpenseActivity" />
 
     </application>
 </manifest>

@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 // Jika ini merah, pastikan nama file XML-mu adalah activity_splash.xml
 import com.example.laundryapp.databinding.ActivitySplashBinding
+import com.example.laundryapp.ui.auth.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 

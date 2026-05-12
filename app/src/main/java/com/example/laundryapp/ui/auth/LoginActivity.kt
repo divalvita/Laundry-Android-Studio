@@ -1,10 +1,12 @@
-package com.example.laundryapp
+package com.example.laundryapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.laundryapp.databinding.ActivityLoginBinding // Pastikan ViewBinding aktif di build.gradle
+import com.example.laundryapp.MainActivity
+import com.example.laundryapp.ui.auth.RegisterActivity
+import com.example.laundryapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
