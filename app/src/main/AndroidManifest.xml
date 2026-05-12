@@ -1,11 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.laundryapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Laundry Diva"
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+        android:label="Laundry App"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+
+        android:usesCleartextTraffic="true">
 
         <activity android:name=".SplashActivity" android:exported="true">
             <intent-filter>
