@@ -3,10 +3,10 @@ package com.example.laundryapp.data.model
 import com.google.gson.annotations.SerializedName
 
 data class UserRequest(
-    @SerializedName("name")    val name: String,
-    @SerializedName("email")   val email: String,
+    @SerializedName("name")     val name: String,
+    @SerializedName("email")    val email: String,
     @SerializedName("password") val password: String,
-    @SerializedName("role")    val role: String = "admin"
+    @SerializedName("role")     val role: String = "admin"
 )
 
 data class UserResponse(
@@ -14,4 +14,11 @@ data class UserResponse(
     @SerializedName("name")  val name: String,
     @SerializedName("email") val email: String,
     @SerializedName("role")  val role: String
+)
+
+data class UserUpdateRequest(
+    @SerializedName("name")     val name: String,
+    @SerializedName("email")    val email: String,
+    @SerializedName("password") val password: String = "12345678",
+    @SerializedName("role")     val role: String
 )

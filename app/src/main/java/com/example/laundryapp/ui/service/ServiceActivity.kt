@@ -55,25 +55,23 @@ class ServiceActivity : AppCompatActivity() {
 
     private fun setupBottomNavigation() {
 
-        binding.bottomNavigation.selectedItemId = R.id.nav_service
+        binding.bottomNavigation.selectedItemId = R.id.nav_home
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
 
-                R.id.nav_dash -> {
+                R.id.nav_home -> {
                     startActivity(Intent(this, MainActivity::class.java))
                     true
                 }
-
-                R.id.nav_service -> true
 
                 R.id.nav_order -> {
                     startActivity(Intent(this, CreateOrderActivity::class.java))
                     true
                 }
 
-                R.id.nav_report -> {
+                R.id.nav_laporan -> {
                     startActivity(Intent(this, OrderHistoryActivity::class.java))
                     true
                 }

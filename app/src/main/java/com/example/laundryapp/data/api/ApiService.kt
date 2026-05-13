@@ -18,6 +18,11 @@ interface ApiService {
 
     @POST("users/")
     fun createUser(@Body request: UserRequest): Call<UserResponse>
+    @PUT("users/{user_id}")
+    fun updateUser(
+        @Path("user_id") userId: Int,
+        @Body request: UserUpdateRequest
+    ): Call<UserResponse>
 
 
     // =========================================
@@ -94,15 +99,15 @@ interface ApiService {
     fun deleteOrder(@Path("order_id") orderId: Int): Call<Unit>
 
 
-    // =========================================
-    // PAYMENTS
-    // =========================================
+    // ================= PAYMENTS =================
 
     @GET("payments/")
     fun getPayments(): Call<List<PaymentResponse>>
 
     @POST("payments/")
-    fun createPayment(@Body payment: PaymentRequest): Call<PaymentResponse>
+    fun createPayment(
+        @Body payment: PaymentRequest
+    ): Call<PaymentResponse>
 
 
     // =========================================
@@ -125,4 +130,12 @@ interface ApiService {
 
     @POST("notifications/")
     fun createNotification(@Body notification: NotificationRequest): Call<NotificationResponse>
+
+
+    // =========================================
+// DASHBOARD
+// =========================================
+
+    @GET("dashboard/")
+    fun getDashboard(): Call<DashboardResponse>
 }

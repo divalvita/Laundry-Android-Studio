@@ -18,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -41,28 +42,24 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        // Ambil semua user lalu cocokkan email & password
-        RetrofitClient.apiService.getUsers().enqueue(object : Callback<List<UserResponse>> {
-            override fun onResponse(
-                call: Call<List<UserResponse>>,
-                response: Response<List<UserResponse>>
-            ) {
-                if (response.isSuccessful) {
-                    val users = response.body()
+        RetrofitClient.apiService.getUsers()
+            .enqueue(object : Callback<List<UserResponse>> {
 
-                    // Cari user yang email-nya cocok
-                    val matchedUser = users?.find { it.email == email }
+                override fun onResponse(
+                    call: Call<List<UserResponse>>,
+                    response: Response<List<UserResponse>>
+                ) {
+                    if (response.isSuccessful) {
+                        val users = response.body()
+                        val matchedUser = users?.find { it.email == email }
 
-                    when {
-                        matchedUser == null -> {
+                        if (matchedUser == null) {
                             Toast.makeText(
                                 this@LoginActivity,
                                 "Email tidak ditemukan!",
                                 Toast.LENGTH_SHORT
                             ).show()
-                        }
-                        else -> {
-                            // Login berhasil
+                        } else {
                             Toast.makeText(
                                 this@LoginActivity,
                                 "Selamat datang, ${matchedUser.name}!",
@@ -72,27 +69,27 @@ class LoginActivity : AppCompatActivity() {
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             intent.putExtra("user_id", matchedUser.id)
                             intent.putExtra("user_name", matchedUser.name)
+                            intent.putExtra("user_email", matchedUser.email)
                             intent.putExtra("user_role", matchedUser.role)
                             startActivity(intent)
                             finish()
                         }
+                    } else {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Gagal mengambil data: ${response.code()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                } else {
+                }
+
+                override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
                     Toast.makeText(
                         this@LoginActivity,
-                        "Gagal mengambil data: ${response.code()}",
-                        Toast.LENGTH_SHORT
+                        "Gagal terhubung ke server: ${t.message}",
+                        Toast.LENGTH_LONG
                     ).show()
                 }
-            }
-
-            override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Gagal terhubung ke server: ${t.message}",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        })
+            })
     }
 }
