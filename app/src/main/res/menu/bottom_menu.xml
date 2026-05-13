@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/nav_dash"
-        android:icon="@drawable/article"
-        android:title="Dashboard" />
-    <item
-        android:id="@+id/nav_service"
-        android:icon="@drawable/outline_build_24"
-        android:title="Service" />
+
     <item
         android:id="@+id/nav_order"
-        android:icon="@drawable/outline_add_24"
-        android:title="New Order" />
+        android:icon="@drawable/outline_add_circle_24"
+        android:tint="#FFFFFF"
+        android:title="Order" />
+
     <item
-        android:id="@+id/nav_report"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Report" />
+        android:id="@+id/nav_home"
+        android:icon="@drawable/outline_add_home_24"
+        android:tint="#FFFFFF"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_laporan"
+        android:icon="@drawable/money"
+        android:tint="#FFFFFF"
+        android:title="Laporan" />
+
 </menu>
