@@ -7,10 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.laundryapp.R
+import com.example.laundryapp.data.api.RetrofitClient
+import com.example.laundryapp.data.model.CustomerRequest
+import com.example.laundryapp.data.model.CustomerResponse
 import com.example.laundryapp.databinding.ActivityCustomerBinding
-import com.example.laundryapp.model.Customer
-import com.example.laundryapp.model.CustomerRequest
-import com.example.laundryapp.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,17 +21,20 @@ class CustomerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityCustomerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbarCustomer)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbarCustomer.setNavigationOnClickListener {
             finish()
         }
 
-        binding.rvCustomer.layoutManager = LinearLayoutManager(this)
+        binding.rvCustomer.layoutManager =
+            LinearLayoutManager(this)
 
         getCustomers()
 
@@ -41,26 +44,36 @@ class CustomerActivity : AppCompatActivity() {
     }
 
     private fun getCustomers() {
+
         RetrofitClient.apiService.getCustomers()
-            .enqueue(object : Callback<List<Customer>> {
+            .enqueue(object : Callback<List<CustomerResponse>> {
 
                 override fun onResponse(
-                    call: Call<List<Customer>>,
-                    response: Response<List<Customer>>
+                    call: Call<List<CustomerResponse>>,
+                    response: Response<List<CustomerResponse>>
                 ) {
-                    if (response.isSuccessful) {
-                        val customers = response.body() ?: emptyList()
 
-                        binding.rvCustomer.adapter = CustomerAdapter(
-                            customers,
-                            onEditClick = { customer ->
-                                showCustomerDialog(customer)
-                            },
-                            onDeleteClick = { customer ->
-                                confirmDeleteCustomer(customer)
-                            }
-                        )
+                    if (response.isSuccessful) {
+
+                        val customers =
+                            response.body() ?: emptyList()
+
+                        binding.rvCustomer.adapter =
+                            CustomerAdapter(
+
+                                customers,
+
+                                onEditClick = { customer ->
+                                    showCustomerDialog(customer)
+                                },
+
+                                onDeleteClick = { customer ->
+                                    confirmDeleteCustomer(customer)
+                                }
+                            )
+
                     } else {
+
                         Toast.makeText(
                             this@CustomerActivity,
                             "Gagal mengambil data customer",
@@ -69,7 +82,11 @@ class CustomerActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<List<Customer>>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<List<CustomerResponse>>,
+                    t: Throwable
+                ) {
+
                     Toast.makeText(
                         this@CustomerActivity,
                         "Error: ${t.message}",
@@ -79,40 +96,88 @@ class CustomerActivity : AppCompatActivity() {
             })
     }
 
-    private fun showCustomerDialog(customer: Customer?) {
-        val view = layoutInflater.inflate(R.layout.dialog_customer, null)
+    private fun showCustomerDialog(
+        customer: CustomerResponse?
+    ) {
 
-        val etName = view.findViewById<EditText>(R.id.etCustomerName)
-        val etPhone = view.findViewById<EditText>(R.id.etCustomerPhone)
-        val etAddress = view.findViewById<EditText>(R.id.etCustomerAddress)
+        val view = layoutInflater.inflate(
+            R.layout.dialog_customer,
+            null
+        )
+
+        val etName =
+            view.findViewById<EditText>(R.id.etCustomerName)
+
+        val etPhone =
+            view.findViewById<EditText>(R.id.etCustomerPhone)
+
+        val etAddress =
+            view.findViewById<EditText>(R.id.etCustomerAddress)
 
         if (customer != null) {
+
             etName.setText(customer.name)
             etPhone.setText(customer.phone)
             etAddress.setText(customer.address)
         }
 
         AlertDialog.Builder(this)
-            .setTitle(if (customer == null) "Tambah Pelanggan" else "Edit Pelanggan")
-            .setView(view)
-            .setPositiveButton(if (customer == null) "Simpan" else "Update") { _, _ ->
 
-                val name = etName.text.toString().trim()
-                val phone = etPhone.text.toString().trim()
-                val address = etAddress.text.toString().trim()
+            .setTitle(
+                if (customer == null)
+                    "Tambah Pelanggan"
+                else
+                    "Edit Pelanggan"
+            )
+
+            .setView(view)
+
+            .setPositiveButton(
+                if (customer == null)
+                    "Simpan"
+                else
+                    "Update"
+            ) { _, _ ->
+
+                val name =
+                    etName.text.toString().trim()
+
+                val phone =
+                    etPhone.text.toString().trim()
+
+                val address =
+                    etAddress.text.toString().trim()
 
                 if (name.length < 3) {
-                    Toast.makeText(this, "Nama minimal 3 karakter", Toast.LENGTH_SHORT).show()
+
+                    Toast.makeText(
+                        this,
+                        "Nama minimal 3 karakter",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                     return@setPositiveButton
                 }
 
                 if (phone.length < 10) {
-                    Toast.makeText(this, "Nomor HP minimal 10 angka", Toast.LENGTH_SHORT).show()
+
+                    Toast.makeText(
+                        this,
+                        "Nomor HP minimal 10 angka",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                     return@setPositiveButton
                 }
 
                 if (address.length < 5) {
-                    Toast.makeText(this, "Alamat minimal 5 karakter", Toast.LENGTH_SHORT).show()
+
+                    Toast.makeText(
+                        this,
+                        "Alamat minimal 5 karakter",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                     return@setPositiveButton
                 }
 
@@ -123,24 +188,34 @@ class CustomerActivity : AppCompatActivity() {
                 )
 
                 if (customer == null) {
+
                     createCustomer(request)
+
                 } else {
+
                     updateCustomer(customer.id, request)
                 }
             }
+
             .setNegativeButton("Batal", null)
+
             .show()
     }
 
-    private fun createCustomer(customer: CustomerRequest) {
+    private fun createCustomer(
+        customer: CustomerRequest
+    ) {
+
         RetrofitClient.apiService.createCustomer(customer)
-            .enqueue(object : Callback<Customer> {
+            .enqueue(object : Callback<CustomerResponse> {
 
                 override fun onResponse(
-                    call: Call<Customer>,
-                    response: Response<Customer>
+                    call: Call<CustomerResponse>,
+                    response: Response<CustomerResponse>
                 ) {
+
                     if (response.isSuccessful) {
+
                         Toast.makeText(
                             this@CustomerActivity,
                             "Customer berhasil ditambahkan",
@@ -148,7 +223,9 @@ class CustomerActivity : AppCompatActivity() {
                         ).show()
 
                         getCustomers()
+
                     } else {
+
                         Toast.makeText(
                             this@CustomerActivity,
                             "Gagal tambah: ${response.code()}",
@@ -157,42 +234,11 @@ class CustomerActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Customer>, t: Throwable) {
-                    Toast.makeText(
-                        this@CustomerActivity,
-                        "Error: ${t.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-    }
-
-    private fun updateCustomer(id: Int, customer: CustomerRequest) {
-        RetrofitClient.apiService.updateCustomer(id, customer)
-            .enqueue(object : Callback<Customer> {
-
-                override fun onResponse(
-                    call: Call<Customer>,
-                    response: Response<Customer>
+                override fun onFailure(
+                    call: Call<CustomerResponse>,
+                    t: Throwable
                 ) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(
-                            this@CustomerActivity,
-                            "Customer berhasil diupdate",
-                            Toast.LENGTH_SHORT
-                        ).show()
 
-                        getCustomers()
-                    } else {
-                        Toast.makeText(
-                            this@CustomerActivity,
-                            "Gagal update: ${response.code()}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<Customer>, t: Throwable) {
                     Toast.makeText(
                         this@CustomerActivity,
                         "Error: ${t.message}",
@@ -202,23 +248,89 @@ class CustomerActivity : AppCompatActivity() {
             })
     }
 
-    private fun confirmDeleteCustomer(customer: Customer) {
+    private fun updateCustomer(
+        id: Int,
+        customer: CustomerRequest
+    ) {
+
+        RetrofitClient.apiService.updateCustomer(
+            id,
+            customer
+        ).enqueue(object : Callback<CustomerResponse> {
+
+            override fun onResponse(
+                call: Call<CustomerResponse>,
+                response: Response<CustomerResponse>
+            ) {
+
+                if (response.isSuccessful) {
+
+                    Toast.makeText(
+                        this@CustomerActivity,
+                        "Customer berhasil diupdate",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    getCustomers()
+
+                } else {
+
+                    Toast.makeText(
+                        this@CustomerActivity,
+                        "Gagal update: ${response.code()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(
+                call: Call<CustomerResponse>,
+                t: Throwable
+            ) {
+
+                Toast.makeText(
+                    this@CustomerActivity,
+                    "Error: ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+    }
+
+    private fun confirmDeleteCustomer(
+        customer: CustomerResponse
+    ) {
+
         AlertDialog.Builder(this)
+
             .setTitle("Hapus Pelanggan")
-            .setMessage("Yakin mau hapus ${customer.name}?")
+
+            .setMessage(
+                "Yakin mau hapus ${customer.name}?"
+            )
+
             .setPositiveButton("Hapus") { _, _ ->
+
                 deleteCustomer(customer.id)
             }
+
             .setNegativeButton("Batal", null)
+
             .show()
     }
 
     private fun deleteCustomer(id: Int) {
-        RetrofitClient.apiService.deleteCustomer(id)
-            .enqueue(object : Callback<Void> {
 
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        RetrofitClient.apiService.deleteCustomer(id)
+            .enqueue(object : Callback<Unit> {
+
+                override fun onResponse(
+                    call: Call<Unit>,
+                    response: Response<Unit>
+                ) {
+
                     if (response.isSuccessful) {
+
                         Toast.makeText(
                             this@CustomerActivity,
                             "Customer berhasil dihapus",
@@ -226,7 +338,9 @@ class CustomerActivity : AppCompatActivity() {
                         ).show()
 
                         getCustomers()
+
                     } else {
+
                         Toast.makeText(
                             this@CustomerActivity,
                             "Gagal hapus: ${response.code()}",
@@ -235,7 +349,11 @@ class CustomerActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<Unit>,
+                    t: Throwable
+                ) {
+
                     Toast.makeText(
                         this@CustomerActivity,
                         "Error: ${t.message}",

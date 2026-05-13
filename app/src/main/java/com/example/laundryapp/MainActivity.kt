@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cardOrder.setOnClickListener {
-            startActivity(Intent(this, CreateOrderActivity::class.java))
+            startActivity(Intent(this, OrderHistoryActivity::class.java))
         }
 
         binding.cardExpense.setOnClickListener {
