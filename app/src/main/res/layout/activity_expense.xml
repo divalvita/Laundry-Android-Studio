@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_cream"
-    tools:context=".ExpenseActivity">
+    tools:context=".ui.expense.ExpenseActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarExpense"

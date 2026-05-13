@@ -1,28 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.laundryapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Laundry Diva"
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-
-        <activity android:name=".SplashActivity" android:exported="true">
+        android:label="Laundry App"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.order.OrderAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ui.auth.LoginActivity" />
+        <activity android:name=".ui.auth.RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CustomerActivity" />
-        <activity android:name=".ServiceActivity" />
-        <activity android:name=".CreateOrderActivity" />
-        <activity android:name=".PaymentActivity" />
-        <activity android:name=".OrderHistoryActivity" />
-        <activity android:name=".ExpenseActivity" />
+        <activity android:name=".ui.customer.CustomerActivity" />
+        <activity android:name=".ui.service.ServiceActivity" />
+        <activity android:name=".ui.order.CreateOrderActivity" />
+        <activity android:name=".ui.payment.PaymentActivity" />
+        <activity android:name=".ui.order.OrderHistoryActivity" />
+        <activity android:name=".ui.expense.ExpenseActivity" />
 
     </application>
+
 </manifest>

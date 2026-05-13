@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_cream"
-    tools:context=".CreateOrderActivity">
+    tools:context=".ui.order.CreateOrderActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"

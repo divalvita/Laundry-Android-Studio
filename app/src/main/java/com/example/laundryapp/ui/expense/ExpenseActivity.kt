@@ -1,5 +1,6 @@
-package com.example.laundryapp // Sesuaikan dengan package name kamu
+package com.example.laundryapp.ui.expense
 
+import android.R
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -31,7 +32,7 @@ class ExpenseActivity : AppCompatActivity() {
 
     private fun setupCategoryDropdown() {
         val categories = arrayOf("Operasional", "Gaji", "Listrik & Air", "Sewa", "Lain-lain")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, categories)
+        val adapter = ArrayAdapter(this, R.layout.simple_list_item_1, categories)
         binding.autoCompleteExpenseCategory.setAdapter(adapter)
     }
 
