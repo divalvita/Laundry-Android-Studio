@@ -1,6 +1,7 @@
 package com.example.laundryapp.ui.order
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.laundryapp.data.model.CustomerResponse
@@ -9,65 +10,48 @@ import com.example.laundryapp.data.model.ServiceResponse
 import com.example.laundryapp.databinding.ItemOrderBinding
 
 class OrderAdapter(
-
     private val orders: List<OrderResponse>,
-
     private val customers: List<CustomerResponse>,
-
-    private val services: List<ServiceResponse>
-
+    private val services: List<ServiceResponse>,
+    private val isManageMode: Boolean = false,
+    private val onActionClick: ((Int) -> Unit)? = null
 ) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
-    inner class OrderViewHolder(
-        private val binding: ItemOrderBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
+    inner class OrderViewHolder(private val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(order: OrderResponse) {
+            // Cari data relasi
+            val customer = customers.find { it.id == order.customerId }
+            val service = services.find { it.id == order.serviceId }
 
-            // Cari nama customer berdasarkan customerId
-            val customerName = customers.find {
-                it.id == order.customerId
-            }?.name ?: "Customer Tidak Ditemukan"
+            // Tampilkan data sesuai UI kamu
+            binding.tvCustomerName.text = customer?.name ?: "Customer Tidak Ditemukan"
+            binding.tvOrderDetails.text = "${service?.serviceName ?: "Service Tidak Ditemukan"} • ${order.weight} Kg"
+            binding.tvOrderPrice.text = "Rp ${order.totalPrice}"
 
-            // Cari nama service berdasarkan serviceId
-            val serviceName = services.find {
-                it.id == order.serviceId
-            }?.serviceName ?: "Service Tidak Ditemukan"
+            // Logika Tombol Aksi agar tidak "nyaru"
+            if (isManageMode) {
+                binding.btnAction.visibility = View.VISIBLE
+                // Ganti teks tombol berdasarkan status saat ini
+                binding.btnAction.text = if (order.status == "done") "Tandai Diambil" else "Tandai Selesai"
 
-            // Tampilkan ke card
-            binding.tvCustomerName.text = customerName
-
-            binding.tvOrderDetails.text =
-                "$serviceName • ${order.weight} Kg"
-
-            binding.tvOrderPrice.text =
-                "Rp ${order.totalPrice}"
+                binding.btnAction.setOnClickListener {
+                    onActionClick?.invoke(order.id)
+                }
+            } else {
+                // Sembunyikan tombol jika hanya melihat riwayat
+                binding.btnAction.visibility = View.GONE
+            }
         }
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): OrderViewHolder {
-
-        val binding = ItemOrderBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+        val binding = ItemOrderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return OrderViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: OrderViewHolder,
-        position: Int
-    ) {
-
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         holder.bind(orders[position])
     }
 
-    override fun getItemCount(): Int {
-        return orders.size
-    }
+    override fun getItemCount(): Int = orders.size
 }

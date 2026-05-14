@@ -51,4 +51,5 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
