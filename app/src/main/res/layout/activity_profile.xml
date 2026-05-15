@@ -171,7 +171,7 @@
                     android:layout_height="64dp"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="20dp"
-                    android:text="Notifikasi        ›"
+                    android:text="Tentang Aplikasi      ›"
                     android:textColor="@color/navy_primary"
                     android:textSize="17sp"
                     android:textStyle="bold" />

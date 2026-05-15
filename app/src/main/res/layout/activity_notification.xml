@@ -1,10 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notification.NotificationActivity">
+    android:background="#EEF9FC">
+
+    <LinearLayout
+        android:id="@+id/headerNotification"
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="@drawable/bg_notification_header"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="34dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btnBackNotification"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="←"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:background="@drawable/bg_profile_circle_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="14dp"
+                android:layout_toEndOf="@id/btnBackNotification"
+                android:text="Notifikasi"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnClearNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:text="🗑 Hapus"
+                android:textColor="@color/navy_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_button_clear_notif" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvNotificationCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 notifikasi"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvEmptyNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔔\n\nBelum ada notifikasi\nNotifikasi baru akan muncul di sini"
+        android:textAlignment="center"
+        android:textColor="@color/navy_primary"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/headerNotification"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavNotification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNotification"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/headerNotification"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavNotification" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavNotification"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="18dp"
+        android:background="@color/bg_cream"
+        app:itemIconTint="@color/blue_secondary"
+        app:itemTextColor="@color/blue_secondary"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

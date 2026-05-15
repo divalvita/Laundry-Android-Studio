@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.laundryapp.R
 import com.example.laundryapp.data.api.RetrofitClient
+import com.example.laundryapp.data.model.NotificationRequest
+import com.example.laundryapp.data.model.NotificationResponse
 import com.example.laundryapp.data.model.PaymentRequest
 import com.example.laundryapp.data.model.PaymentResponse
 import com.example.laundryapp.databinding.ActivityPaymentBinding
@@ -17,6 +19,7 @@ class PaymentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPaymentBinding
 
     private var orderId: Int = 0
+    private var customerId: Int = 0
     private var totalPrice: Int = 0
     private var selectedMethod: String = "cash"
 
@@ -34,9 +37,11 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         orderId = intent.getIntExtra("order_id", 0)
+        customerId = intent.getIntExtra("customer_id", 0)
         totalPrice = intent.getIntExtra("total_price", 0)
 
         binding.tvTotalAmount.text = "Rp $totalPrice"
+
         binding.rbCash.isChecked = true
 
         binding.rgPaymentMethod.setOnCheckedChangeListener { _, checkedId ->
@@ -54,12 +59,20 @@ class PaymentActivity : AppCompatActivity() {
 
     private fun confirmPayment() {
         if (orderId == 0) {
-            Toast.makeText(this, "Order ID tidak ditemukan", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Order ID tidak ditemukan",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
         if (totalPrice <= 0) {
-            Toast.makeText(this, "Total pembayaran tidak valid", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Total pembayaran tidak valid",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
@@ -77,6 +90,9 @@ class PaymentActivity : AppCompatActivity() {
                     response: Response<PaymentResponse>
                 ) {
                     if (response.isSuccessful) {
+
+                        createPaymentNotification()
+
                         Toast.makeText(
                             this@PaymentActivity,
                             "Pembayaran berhasil",
@@ -84,6 +100,7 @@ class PaymentActivity : AppCompatActivity() {
                         ).show()
 
                         finish()
+
                     } else {
                         Toast.makeText(
                             this@PaymentActivity,
@@ -93,12 +110,45 @@ class PaymentActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<PaymentResponse>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<PaymentResponse>,
+                    t: Throwable
+                ) {
                     Toast.makeText(
                         this@PaymentActivity,
                         "Error payment: ${t.message}",
                         Toast.LENGTH_LONG
                     ).show()
+                }
+            })
+    }
+
+    private fun createPaymentNotification() {
+        if (customerId == 0) {
+            return
+        }
+
+        val request = NotificationRequest(
+            customerId = customerId,
+            title = "Pembayaran Berhasil",
+            message = "Pembayaran untuk order #$orderId berhasil sebesar Rp $totalPrice"
+        )
+
+        RetrofitClient.apiService.createNotification(request)
+            .enqueue(object : Callback<NotificationResponse> {
+
+                override fun onResponse(
+                    call: Call<NotificationResponse>,
+                    response: Response<NotificationResponse>
+                ) {
+                    // sukses notif
+                }
+
+                override fun onFailure(
+                    call: Call<NotificationResponse>,
+                    t: Throwable
+                ) {
+                    // abaikan
                 }
             })
     }

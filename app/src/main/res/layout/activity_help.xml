@@ -1,10 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.help.HelpActivity">
+    android:background="@color/bg_cream">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:background="@color/navy_primary"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/btnBackHelp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="←"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:background="@drawable/bg_profile_circle_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bantuan"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="28dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Panduan penggunaan aplikasi"
+                android:textColor="#B9D4FF"
+                android:textSize="16sp"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-26dp"
+            android:background="@drawable/bg_profile_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CARA MENGGUNAKAN"
+                android:textColor="@color/blue_secondary"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_profile_card"
+                android:padding="20dp"
+                android:text="1. Tambahkan data customer.\n\n2. Pastikan data service tersedia.\n\n3. Buat order baru dari menu New Order.\n\n4. Lanjutkan ke pembayaran.\n\n5. Cek status order di riwayat.\n\n6. Notifikasi akan muncul ketika order dan pembayaran berhasil."
+                android:textColor="@color/navy_primary"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FAQ"
+                android:textColor="@color/blue_secondary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="28dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_profile_card"
+                android:padding="20dp"
+                android:text="Q: Kenapa data tidak muncul?\nA: Pastikan backend aktif dan aplikasi terhubung ke URL API yang benar.\n\nQ: Kenapa gagal login?\nA: Pastikan email sudah terdaftar di database.\n\nQ: Kenapa order gagal dibuat?\nA: Pastikan customer dan service sudah dipilih.\n\nQ: Kenapa notifikasi tidak muncul?\nA: Pastikan izin notifikasi sudah diaktifkan."
+                android:textColor="@color/navy_primary"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KONTAK"
+                android:textColor="@color/blue_secondary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="28dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_profile_card"
+                android:padding="20dp"
+                android:text="Jika terjadi error, hubungi anggota kelompok bagian pengembang aplikasi."
+                android:textColor="@color/navy_primary"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

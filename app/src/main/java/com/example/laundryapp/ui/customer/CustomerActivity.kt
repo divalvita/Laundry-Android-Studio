@@ -2,6 +2,9 @@ package com.example.laundryapp.ui.customer
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +21,8 @@ import retrofit2.Response
 class CustomerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCustomerBinding
+
+    private var allCustomers: List<CustomerResponse> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,8 @@ class CustomerActivity : AppCompatActivity() {
         binding.rvCustomer.layoutManager =
             LinearLayoutManager(this)
 
+        setupSearch()
+
         getCustomers()
 
         binding.fabAddCustomer.setOnClickListener {
@@ -43,7 +50,60 @@ class CustomerActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupSearch() {
+
+        binding.etSearch.addTextChangedListener(
+            object : TextWatcher {
+
+                override fun afterTextChanged(s: Editable?) {
+
+                    val keyword =
+                        s.toString().trim().lowercase()
+
+                    filterCustomers(keyword)
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                }
+            }
+        )
+    }
+
+    private fun filterCustomers(keyword: String) {
+
+        val filtered = if (keyword.isEmpty()) {
+
+            allCustomers
+
+        } else {
+
+            allCustomers.filter {
+
+                it.name.lowercase().contains(keyword) ||
+                        it.phone.lowercase().contains(keyword) ||
+                        it.address.lowercase().contains(keyword)
+            }
+        }
+
+        showCustomerList(filtered)
+    }
+
     private fun getCustomers() {
+
+        binding.progressBar.visibility = View.VISIBLE
 
         RetrofitClient.apiService.getCustomers()
             .enqueue(object : Callback<List<CustomerResponse>> {
@@ -53,24 +113,14 @@ class CustomerActivity : AppCompatActivity() {
                     response: Response<List<CustomerResponse>>
                 ) {
 
+                    binding.progressBar.visibility = View.GONE
+
                     if (response.isSuccessful) {
 
-                        val customers =
+                        allCustomers =
                             response.body() ?: emptyList()
 
-                        binding.rvCustomer.adapter =
-                            CustomerAdapter(
-
-                                customers,
-
-                                onEditClick = { customer ->
-                                    showCustomerDialog(customer)
-                                },
-
-                                onDeleteClick = { customer ->
-                                    confirmDeleteCustomer(customer)
-                                }
-                            )
+                        showCustomerList(allCustomers)
 
                     } else {
 
@@ -87,6 +137,8 @@ class CustomerActivity : AppCompatActivity() {
                     t: Throwable
                 ) {
 
+                    binding.progressBar.visibility = View.GONE
+
                     Toast.makeText(
                         this@CustomerActivity,
                         "Error: ${t.message}",
@@ -94,6 +146,25 @@ class CustomerActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+    }
+
+    private fun showCustomerList(
+        customers: List<CustomerResponse>
+    ) {
+
+        binding.rvCustomer.adapter =
+            CustomerAdapter(
+
+                customers,
+
+                onEditClick = { customer ->
+                    showCustomerDialog(customer)
+                },
+
+                onDeleteClick = { customer ->
+                    confirmDeleteCustomer(customer)
+                }
+            )
     }
 
     private fun showCustomerDialog(

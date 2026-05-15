@@ -5,9 +5,13 @@
     <color name="accent_orange">#FAB95B</color>
     <color name="bg_cream">#E8E2DB</color>
     <color name="white">#FFFFFF</color>
-    <color name="status_done">#4CAF50</color>
+
 
     <color name="input_bg">#F5F5F5</color>
     <color name="black">#000000</color>
     <color name="grey_light">#D3D3D3</color>
+    <color name="status_pending">#F5A623</color>
+    <color name="status_processing">#1E88E5</color>
+    <color name="status_done">#2E7D32</color>
+    <color name="status_taken">#616161</color>
 </resources>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_cream">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
+
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:background="@color/navy_primary"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/btnBackAbout"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="←"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:background="@drawable/bg_profile_circle_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tentang Aplikasi"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Laundry App v2.0"
+                android:textColor="#B9D4FF"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- CONTENT -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-26dp"
+            android:background="@drawable/bg_profile_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DESKRIPSI"
+                android:textColor="@color/blue_secondary"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Laundry App merupakan aplikasi manajemen laundry berbasis Android yang dibuat untuk membantu pengelolaan customer, service, order, pembayaran, pengeluaran, dan notifikasi laundry."
+                android:textColor="@color/navy_primary"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEKNOLOGI"
+                android:textColor="@color/blue_secondary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="28dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_profile_card"
+                android:layout_marginTop="14dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="20dp"
+                    android:text="Frontend : Android Kotlin"
+                    android:textColor="@color/navy_primary"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#DDEAF0" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="20dp"
+                    android:text="Backend : FastAPI"
+                    android:textColor="@color/navy_primary"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#DDEAF0" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="20dp"
+                    android:text="Database : MySQL"
+                    android:textColor="@color/navy_primary"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KELOMPOK 3"
+                android:textColor="@color/blue_secondary"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="28dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Project Komputasi Bergerak\nKelompok Laundry App\n1. Bambang Subangkit Ariffin\n2. Luthfi Rustian\n3. Ni Made Diva Alvita\n4. Nur Sabrina Hanifa\n5. Wiryawan Pratama Wiriadinata"
+                android:textColor="@color/navy_primary"
+                android:textSize="16sp"
+                android:layout_marginTop="12dp" />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FITUR UTAMA"
+            android:textColor="@color/blue_secondary"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="28dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_profile_card"
+            android:layout_marginTop="14dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="• Customer Management"
+                android:textColor="@color/navy_primary"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDEAF0" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="• Service &amp; Category"
+                android:textColor="@color/navy_primary"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDEAF0" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="• Order &amp; Payment System"
+                android:textColor="@color/navy_primary"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDEAF0" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="• Realtime Notification"
+                android:textColor="@color/navy_primary"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

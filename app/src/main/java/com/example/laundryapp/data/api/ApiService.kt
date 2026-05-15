@@ -3,6 +3,7 @@ package com.example.laundryapp.data.api
 import com.example.laundryapp.data.model.*
 import retrofit2.Call
 import retrofit2.http.*
+import retrofit2.http.GET
 
 interface ApiService {
 
@@ -129,8 +130,14 @@ interface ApiService {
     fun getNotifications(): Call<List<NotificationResponse>>
 
     @POST("notifications/")
-    fun createNotification(@Body notification: NotificationRequest): Call<NotificationResponse>
+    fun createNotification(
+        @Body notification: NotificationRequest
+    ): Call<NotificationResponse>
 
+    @DELETE("notifications/{notification_id}")
+    fun deleteNotification(
+        @Path("notification_id") notificationId: Int
+    ): Call<Unit>
 
     // =========================================
 // DASHBOARD
@@ -138,4 +145,6 @@ interface ApiService {
 
     @GET("dashboard/")
     fun getDashboard(): Call<DashboardResponse>
+    @GET("/")
+    fun checkApi(): Call<Map<String, Any>>
 }

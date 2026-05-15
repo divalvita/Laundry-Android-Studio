@@ -18,6 +18,7 @@ import com.example.laundryapp.ui.settings.SettingsActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.laundryapp.ui.about.AboutAppActivity
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -92,7 +93,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         binding.rowNotification.setOnClickListener {
-            startActivity(Intent(this, NotificationActivity::class.java))
+            startActivity(Intent(this, AboutAppActivity::class.java))
         }
 
         binding.rowSettings.setOnClickListener {

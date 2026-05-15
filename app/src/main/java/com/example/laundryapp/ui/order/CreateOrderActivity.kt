@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.laundryapp.data.api.RetrofitClient
 import com.example.laundryapp.data.model.CustomerResponse
+import com.example.laundryapp.data.model.NotificationRequest
+import com.example.laundryapp.data.model.NotificationResponse
 import com.example.laundryapp.data.model.OrderRequest
 import com.example.laundryapp.data.model.OrderResponse
 import com.example.laundryapp.data.model.ServiceResponse
@@ -47,6 +49,7 @@ class CreateOrderActivity : AppCompatActivity() {
         loadServices()
 
         binding.etWeight.addTextChangedListener(object : TextWatcher {
+
             override fun afterTextChanged(s: Editable?) {
                 calculateTotal()
             }
@@ -56,14 +59,16 @@ class CreateOrderActivity : AppCompatActivity() {
                 start: Int,
                 count: Int,
                 after: Int
-            ) {}
+            ) {
+            }
 
             override fun onTextChanged(
                 s: CharSequence?,
                 start: Int,
                 before: Int,
                 count: Int
-            ) {}
+            ) {
+            }
         })
 
         binding.btnNextPayment.setOnClickListener {
@@ -72,6 +77,7 @@ class CreateOrderActivity : AppCompatActivity() {
     }
 
     private fun loadCustomers() {
+
         RetrofitClient.apiService.getCustomers()
             .enqueue(object : Callback<List<CustomerResponse>> {
 
@@ -79,7 +85,9 @@ class CreateOrderActivity : AppCompatActivity() {
                     call: Call<List<CustomerResponse>>,
                     response: Response<List<CustomerResponse>>
                 ) {
+
                     if (response.isSuccessful) {
+
                         customers = response.body() ?: emptyList()
 
                         val customerNames = customers.map { it.name }
@@ -95,16 +103,22 @@ class CreateOrderActivity : AppCompatActivity() {
                         binding.autoCompleteCustomer.setOnItemClickListener { _, _, position, _ ->
                             selectedCustomer = customers[position]
                         }
+
                     } else {
+
                         Toast.makeText(
                             this@CreateOrderActivity,
-                            "Gagal mengambil customer: ${response.code()}",
+                            "Gagal mengambil customer",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
 
-                override fun onFailure(call: Call<List<CustomerResponse>>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<List<CustomerResponse>>,
+                    t: Throwable
+                ) {
+
                     Toast.makeText(
                         this@CreateOrderActivity,
                         "Error customer: ${t.message}",
@@ -115,6 +129,7 @@ class CreateOrderActivity : AppCompatActivity() {
     }
 
     private fun loadServices() {
+
         RetrofitClient.apiService.getServices()
             .enqueue(object : Callback<List<ServiceResponse>> {
 
@@ -122,7 +137,9 @@ class CreateOrderActivity : AppCompatActivity() {
                     call: Call<List<ServiceResponse>>,
                     response: Response<List<ServiceResponse>>
                 ) {
+
                     if (response.isSuccessful) {
+
                         services = response.body() ?: emptyList()
 
                         val serviceNames = services.map {
@@ -141,16 +158,22 @@ class CreateOrderActivity : AppCompatActivity() {
                             selectedService = services[position]
                             calculateTotal()
                         }
+
                     } else {
+
                         Toast.makeText(
                             this@CreateOrderActivity,
-                            "Gagal mengambil layanan: ${response.code()}",
+                            "Gagal mengambil layanan",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
 
-                override fun onFailure(call: Call<List<ServiceResponse>>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<List<ServiceResponse>>,
+                    t: Throwable
+                ) {
+
                     Toast.makeText(
                         this@CreateOrderActivity,
                         "Error service: ${t.message}",
@@ -161,35 +184,66 @@ class CreateOrderActivity : AppCompatActivity() {
     }
 
     private fun calculateTotal() {
+
         val service = selectedService
-        val weight = binding.etWeight.text.toString().toFloatOrNull() ?: 0f
 
-        totalPrice = if (service != null && weight > 0f) {
-            (service.pricePerKg * weight).toInt()
-        } else {
-            0
-        }
+        val weight =
+            binding.etWeight.text.toString()
+                .toFloatOrNull() ?: 0f
 
-        binding.tvTotalPrice.text = "Rp $totalPrice"
+        totalPrice =
+            if (service != null && weight > 0f) {
+
+                (service.pricePerKg * weight).toInt()
+
+            } else {
+
+                0
+            }
+
+        binding.tvTotalPrice.text =
+            "Rp $totalPrice"
     }
 
     private fun createOrder() {
+
         val customer = selectedCustomer
         val service = selectedService
-        val weight = binding.etWeight.text.toString().toFloatOrNull()
+
+        val weight =
+            binding.etWeight.text.toString()
+                .toFloatOrNull()
 
         if (customer == null) {
-            Toast.makeText(this, "Pilih customer dulu", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(
+                this,
+                "Pilih customer dulu",
+                Toast.LENGTH_SHORT
+            ).show()
+
             return
         }
 
         if (service == null) {
-            Toast.makeText(this, "Pilih layanan dulu", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(
+                this,
+                "Pilih layanan dulu",
+                Toast.LENGTH_SHORT
+            ).show()
+
             return
         }
 
         if (weight == null || weight <= 0f) {
-            Toast.makeText(this, "Berat harus lebih dari 0", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(
+                this,
+                "Berat harus lebih dari 0",
+                Toast.LENGTH_SHORT
+            ).show()
+
             return
         }
 
@@ -206,6 +260,7 @@ class CreateOrderActivity : AppCompatActivity() {
                     call: Call<OrderResponse>,
                     response: Response<OrderResponse>
                 ) {
+
                     if (response.isSuccessful) {
 
                         val order = response.body()
@@ -217,6 +272,9 @@ class CreateOrderActivity : AppCompatActivity() {
                         ).show()
 
                         if (order != null) {
+
+                            createOrderNotification(order)
+
                             val intent = Intent(
                                 this@CreateOrderActivity,
                                 PaymentActivity::class.java
@@ -224,26 +282,62 @@ class CreateOrderActivity : AppCompatActivity() {
 
                             intent.putExtra("order_id", order.id)
                             intent.putExtra("total_price", order.totalPrice)
+                            intent.putExtra("customer_id", order.customerId)
 
                             startActivity(intent)
+
                             finish()
                         }
 
                     } else {
+
                         Toast.makeText(
                             this@CreateOrderActivity,
-                            "Gagal buat order: ${response.code()} ${response.errorBody()?.string()}",
+                            "Gagal buat order: ${response.code()} ${
+                                response.errorBody()?.string()
+                            }",
                             Toast.LENGTH_LONG
                         ).show()
                     }
                 }
 
-                override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<OrderResponse>,
+                    t: Throwable
+                ) {
+
                     Toast.makeText(
                         this@CreateOrderActivity,
                         "Error order: ${t.message}",
                         Toast.LENGTH_LONG
                     ).show()
+                }
+            })
+    }
+
+    private fun createOrderNotification(order: OrderResponse) {
+
+        val request = NotificationRequest(
+            customerId = order.customerId,
+            title = "Order Baru Dibuat",
+            message = "Order #${order.id} berhasil dibuat dengan total Rp ${order.totalPrice}"
+        )
+
+        RetrofitClient.apiService.createNotification(request)
+            .enqueue(object : Callback<NotificationResponse> {
+
+                override fun onResponse(
+                    call: Call<NotificationResponse>,
+                    response: Response<NotificationResponse>
+                ) {
+                    // sukses notif
+                }
+
+                override fun onFailure(
+                    call: Call<NotificationResponse>,
+                    t: Throwable
+                ) {
+                    // abaikan
                 }
             })
     }
