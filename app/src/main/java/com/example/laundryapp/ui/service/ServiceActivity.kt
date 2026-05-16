@@ -202,7 +202,6 @@ class ServiceActivity : AppCompatActivity() {
                 }
 
                 val request = ServiceRequest(
-                    categoryId = service?.categoryId ?: 1,
                     serviceName = name,
                     pricePerKg = price.toInt(),
                     estimatedDays = days.toInt(),

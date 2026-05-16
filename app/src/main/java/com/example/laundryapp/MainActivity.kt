@@ -26,6 +26,7 @@ import com.example.laundryapp.ui.expense.ExpenseActivity
 import com.example.laundryapp.ui.notification.NotificationActivity
 import com.example.laundryapp.ui.order.CreateOrderActivity
 import com.example.laundryapp.ui.order.OrderHistoryActivity
+import com.example.laundryapp.ui.report.ReportActivity
 import com.example.laundryapp.ui.profile.ProfileActivity
 import com.example.laundryapp.ui.service.ServiceActivity
 import com.github.mikephil.charting.components.XAxis
@@ -149,7 +150,14 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_laporan -> {
-                    startActivity(Intent(this, OrderHistoryActivity::class.java))
+
+                    startActivity(
+                        Intent(
+                            this,
+                            ReportActivity::class.java
+                        )
+                    )
+
                     true
                 }
 

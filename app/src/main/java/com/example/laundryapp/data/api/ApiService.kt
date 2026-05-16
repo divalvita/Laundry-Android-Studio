@@ -4,6 +4,9 @@ import com.example.laundryapp.data.model.*
 import retrofit2.Call
 import retrofit2.http.*
 import retrofit2.http.GET
+import retrofit2.http.DELETE
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -120,6 +123,17 @@ interface ApiService {
 
     @POST("expenses/")
     fun createExpense(@Body expense: ExpenseRequest): Call<ExpenseResponse>
+
+    @PUT("expenses/{expense_id}")
+    fun updateExpense(
+        @Path("expense_id") expenseId: Int,
+        @Body expense: ExpenseRequest
+    ): Call<ExpenseResponse>
+
+    @DELETE("expenses/{expense_id}")
+    fun deleteExpense(
+        @Path("expense_id") expenseId: Int
+    ): Call<Unit>
 
 
     // =========================================
