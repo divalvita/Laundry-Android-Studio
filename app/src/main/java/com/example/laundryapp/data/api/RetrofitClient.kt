@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     // 1. Ganti ke URL Ngrok static kamu
-    private const val BASE_URL = "http://192.168.1.104:8000/"
+    private const val BASE_URL = "https://jong-uninsurable-distributively.ngrok-free.dev/"
 
     // 2. Buat Client untuk menyelipkan tiket "bypass" Ngrok
     private val client = OkHttpClient.Builder()

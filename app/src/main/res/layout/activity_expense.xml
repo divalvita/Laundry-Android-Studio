@@ -129,7 +129,9 @@
                 android:background="@drawable/bg_input_login"
                 android:hint="@string/hint_tgl_pengeluaran"
                 android:importantForAutofill="no"
-                android:inputType="date"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true"
                 android:paddingHorizontal="16dp" />
 
             <Button
